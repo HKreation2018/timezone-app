@@ -24,7 +24,21 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-				</configuration>
+				  <cloudHubDeployment>
+                  <uri>https://anypoint.mulesoft.com/</uri>
+                  <muleVersion>4.2.2</muleVersion>
+                  <username>hari-cicd</username>
+                  <password>Indian@018</password>
+                  <applicationName>timezone-app</applicationName>
+                  <environment>Sandbox</environment>
+				  <region>eu-west-1</region>
+                  <workers>1</workers>
+                  <workerType>Micro</workerType>
+                  <properties>
+                    <key>value</key>
+                  </properties>
+                  </cloudHubDeployment>
+			    </configuration>
 			</plugin>
 		</plugins>
 	</build>
