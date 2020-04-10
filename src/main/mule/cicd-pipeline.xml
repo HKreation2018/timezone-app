@@ -5,13 +5,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="31a8ceaf-433d-4870-82a9-30450c933fd9" basePath="/timezone" >
-		<http:listener-connection host="0.0.0.0" port="8081" />
+		<http:listener-connection host="0.0.0.0" port="8084" />
 	</http:listener-config>
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="9220a4ee-0aab-4644-ad37-09f36759d63c" basePath="/api/timezone">
 		<http:request-connection host="worldtimeapi.org" />
 	</http:request-config>
 	<flow name="cicd-pipelineFlow" doc:id="5362e596-1b6d-4869-8ae3-59b47cf7b2fd" >
 		<http:listener doc:name="Listener" doc:id="e866da6a-0849-4d39-91fc-b7e4cf5026c9" config-ref="HTTP_Listener_config" path="/{region}/{city}"/>
+		<logger level="INFO" doc:name="Logger" doc:id="6210eea8-6eb0-4e04-9f12-ea2d851a294d" message="************************************Request reached api ************************************"/>
 		<http:request method="GET" doc:name="Request" doc:id="d298bfa9-1a87-42d1-bd1b-851a436cb20e" config-ref="HTTP_Request_configuration" path="/{region}/{city}">
 			<http:uri-params ><![CDATA[#[output application/java
 ---
@@ -20,5 +21,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	region : attributes.uriParams.region
 }]]]></http:uri-params>
 		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="8858ab9a-91e2-4bf8-b738-c0902d02d696" message="*******************Success*****************************************"/>
 	</flow>
 </mule>
