@@ -32,7 +32,7 @@
 				  <workers>1</workers>
                   <workerType>Micro</workerType>
                   <applicationName>timezone-app</applicationName>
-				  <region>eu-west-1</region>
+				  <objectStoreV2>true</objectStoreV2>
                   </cloudHubDeployment>
 			    </configuration>
 			</plugin>
