@@ -25,18 +25,13 @@
 				<extensions>true</extensions>
 				<configuration>
 				  <cloudHubDeployment>
-                  <uri>https://anypoint.mulesoft.com/</uri>
                   <muleVersion>4.2.2</muleVersion>
                   <username>hari-cicd</username>
                   <password>Indian@018</password>
-                  <applicationName>timezone-app</applicationName>
-                  <environment>Sandbox</environment>
-				  <region>eu-west-1</region>
-                  <workers>1</workers>
+				  <environment>Sandbox</environment>
+				  <workers>1</workers>
                   <workerType>Micro</workerType>
-                  <properties>
-                    <key>value</key>
-                  </properties>
+                  <applicationName>timezone-app</applicationName>
                   </cloudHubDeployment>
 			    </configuration>
 			</plugin>
