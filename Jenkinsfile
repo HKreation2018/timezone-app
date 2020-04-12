@@ -15,11 +15,11 @@ pipeline {
       }
     }
 
-    stage('Test') {
+ /*   stage('Test') {
       steps {
           bat "mvn test"
       }
-    }
+    } */
 
      stage('Deploy Development') {
       environment {

@@ -15,7 +15,7 @@
 
 		<app.runtime>4.2.2</app.runtime>
 		<mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
-	<munit.version>2.2.0</munit.version>
+	<!--<munit.version>2.2.0</munit.version> -->
     </properties>
 
 	<build>
@@ -40,7 +40,7 @@
                  </cloudHubDeployment>
 				</configuration>
 			</plugin>
-		<plugin>
+		<!-- <plugin>
                 <groupId>com.mulesoft.munit.tools</groupId>
                 <artifactId>munit-maven-plugin</artifactId>
                 <version>${munit.version}</version>
@@ -62,7 +62,7 @@
                         </formats>
                     </coverage>
                 </configuration>
-            </plugin>
+            </plugin> -->
         </plugins>
 	</build>
 
@@ -79,7 +79,7 @@
             <version>1.1.5</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-		<dependency>
+	<!--	<dependency>
             <groupId>com.mulesoft.munit</groupId>
             <artifactId>munit-runner</artifactId>
             <version>2.2.0</version>
@@ -89,7 +89,7 @@
             <artifactId>munit-tools</artifactId>
             <version>2.2.0</version>
             <scope>test</scope>
-        </dependency>
+        </dependency> -->
     </dependencies>
 
 	<repositories>
