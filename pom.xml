@@ -6,6 +6,7 @@
 	<artifactId>timezone-app</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
+
 	<name>timezone-app</name>
 
     <properties>
@@ -14,7 +15,8 @@
 
 		<app.runtime>4.2.2</app.runtime>
 		<mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
-	</properties>
+	<munit.version>2.2.1</munit.version>
+    </properties>
 
 	<build>
 		<plugins>
@@ -25,18 +27,43 @@
 				<extensions>true</extensions>
 				<configuration>
 				  <cloudHubDeployment>
-                  <muleVersion>4.2.2</muleVersion>
-                  <username>hari-cicd</username>
-                  <password>Indian@018</password>
-				  <environment>Sandbox</environment>
-				  <workers>1</workers>
-                  <workerType>Micro</workerType>
-                  <applicationName>timezone-app</applicationName>
-				  <objectStoreV2>true</objectStoreV2>
-                  </cloudHubDeployment>
-			    </configuration>
+                    <uri>https://anypoint.mulesoft.com</uri>
+                    <muleVersion>${mule.version}</muleVersion>
+                    <!-- Deploy User Parameter -->
+                    <username>${anypoint.username}</username>
+                    <password>${anypoint.password}</password>
+                    <!-- Environment Parameter -->
+                    <environment>${cloudhub.environment}</environment>
+                    <applicationName>${cloudhub.app}</applicationName>
+                    <businessGroup>${cloudhub.bg}</businessGroup>
+                    <workerType>${cloudhub.worker}</workerType>
+                 </cloudHubDeployment>
+				</configuration>
 			</plugin>
-		</plugins>
+		<plugin>
+                <groupId>com.mulesoft.munit.tools</groupId>
+                <artifactId>munit-maven-plugin</artifactId>
+                <version>${munit.version}</version>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                            <goal>coverage-report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <coverage>
+                        <runCoverage>true</runCoverage>
+                        <formats>
+                            <format>html</format>
+                        </formats>
+                    </coverage>
+                </configuration>
+            </plugin>
+        </plugins>
 	</build>
 
 	<dependencies>
@@ -52,7 +79,20 @@
             <version>1.1.5</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-	</dependencies>
+		<dependency>
+            <groupId>com.mulesoft.munit</groupId>
+            <artifactId>munit-runner</artifactId>
+            <version>2.2.1</version>
+            <classifier>mule-plugin</classifier>
+            <scope>test</scope>
+        </dependency>	<dependency>
+            <groupId>com.mulesoft.munit</groupId>
+            <artifactId>munit-tools</artifactId>
+            <version>2.2.1</version>
+            <classifier>mule-plugin</classifier>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<repositories>
           <repository>
