@@ -3,7 +3,8 @@ pipeline {
   agent any
   environment {
     //adding a comment for the commit test
-    DEPLOY_CREDS = credentials('deploy-anypoint-user')
+    DEPLOY_CREDS_USR = "hari-cicd"
+	DEPLOY_CREDS_PSW = "Indian@018"
     MULE_VERSION = '4.2.2'
     BG = "IFT"
     WORKER = "Micro"
