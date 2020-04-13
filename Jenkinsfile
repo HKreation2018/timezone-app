@@ -42,7 +42,7 @@ pipeline {
     } */
 	stage('performance test') {
       steps {
-             bat  'C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/jmeter.bat -jjmeter.save.saveservice.output_format=xml -n -t C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/worldTimeZoneTest.jmx -l C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/report.csv -e -o C:/Users/harikrishnan.pv/Downloads/htmlreports/timezone-app-report'
+             bat  'C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/jmeter.bat -n -t C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/worldTimeZoneTest.jmx -l C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/report.csv -e -o C:/Users/harikrishnan.pv/Downloads/htmlreports/timezone-app-report'
       }
     }
   }
