@@ -1,6 +1,13 @@
 pipeline {
 
   agent any
+  
+  parameters {
+            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'THREADS',
+            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'rampupTime',
+            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'durationSecond', 
+          }
+
   environment {
     //adding a comment for the commit test
     DEPLOY_CREDS_USR = "hari-cicd"
@@ -22,15 +29,15 @@ pipeline {
       }
     } */
 
-     stage('Deploy Development') {
+/*     stage('Deploy Development') {
       environment {
         ENVIRONMENT = 'Sandbox'
-        APP_NAME = 'timezone-app'
+        APP_NAME = 'jmeter-maven-plugin-test'
       }
       steps {
             bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.worker="%WORKER%"'
       }
-    }
+    } */
    /* stage('Deploy Production') {
       environment {
         ENVIRONMENT = 'Production'
@@ -40,10 +47,19 @@ pipeline {
             bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.bg="%BG%" -Dcloudhub.worker="%WORKER%"'
       }
     } */
+	
 	stage('performance test') {
-      steps {
-             bat  'C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/jmeter.bat -n -t C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/worldTimeZoneTest.jmx -l C:/Users/harikrishnan.pv/Downloads/apache-jmeter-5.2.1/apache-jmeter-5.2.1/bin/report.csv -e -o C:/Users/harikrishnan.pv/Downloads/htmlreports/timezone-app-report'
+	   steps {
+             bat 'mvn verify -DthreadCount=${params.THREADS} -DrampupTime=${params.rampupTime} -DdurationSecond=${params.durationSecond}'
       }
+	  
+	  post {
+        always {
+            archiveArtifacts artifacts: 'target/jmeter/results/*.csv', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
+			perfReport 'target/jmeter/results/*.csv'
+			publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/jmeter/reports/worldTimeZoneTest', reportFiles: 'index.html', reportName: 'Performance Report', reportTitles: ''])
+        }
+	}
     }
   }
 }
