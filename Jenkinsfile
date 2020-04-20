@@ -4,8 +4,8 @@ pipeline {
   
   parameters {
             choice (choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'THREADS',
-            ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'rampupTime',
-            ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'durationSecond')
+            ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'time of threads for the run', name: 'rampupTime',
+            ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'duration of threads for the run', name: 'durationSecond')
           }
 
   environment {
