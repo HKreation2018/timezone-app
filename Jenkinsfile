@@ -1,13 +1,6 @@
 pipeline {
 
   agent any
-  
-  parameters {
-            choice (choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'THREADS',
-            ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'time of threads for the run', name: 'rampupTime',
-            ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'duration of threads for the run', name: 'durationSecond')
-          }
-
   environment {
     //adding a comment for the commit test
     DEPLOY_CREDS_USR = "hari-cicd"
