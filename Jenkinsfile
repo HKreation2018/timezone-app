@@ -2,11 +2,11 @@ pipeline {
 
   agent any
   
-  parameters {
-            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'THREADS',
-            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'rampupTime',
-            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'durationSecond', 
-          }
+  parameters [{
+            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'THREADS'},{
+            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'rampupTime'},{
+            choice choices: ['5', '10', '20', '50', '100', '200', '500', '1000'], description: 'No of threads for the run', name: 'durationSecond'} 
+          ]
 
   environment {
     //adding a comment for the commit test
