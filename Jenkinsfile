@@ -43,7 +43,7 @@ pipeline {
 	
 	stage('performance test') {
 	   steps {
-             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=${rampupTime} -DdurationSecond=${durationSecond}'
+             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=${rampup} -DdurationSecond=${duration}'
       }
 	  
 	  post {
