@@ -52,7 +52,8 @@
                         <duration>${durationSecond}</duration>
                    </propertiesUser>
 				   <testFilesIncluded>
-                       <jMeterTestFile>${fileName}</jMeterTestFile>
+				       <jMeterTestFile>worldTimeZoneTest.jmx</jMeterTestFile>
+                       <jMeterTestFile>mocktarget.jmx</jMeterTestFile>
                    </testFilesIncluded>
                </configuration>
                 <executions>
