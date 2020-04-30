@@ -52,7 +52,7 @@
                         <duration>${durationSecond}</duration>
                    </propertiesUser>
 				   <testFilesIncluded>
-                       <jMeterTestFile>${fileName}.jmx</jMeterTestFile>
+                       <jMeterTestFile>${fileName}</jMeterTestFile>
                    </testFilesIncluded>
                </configuration>
                 <executions>
