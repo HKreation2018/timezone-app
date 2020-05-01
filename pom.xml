@@ -47,14 +47,20 @@
                 <configuration>
                    <testResultsTimestamp>false</testResultsTimestamp>
                    <propertiesUser>
-                        <threads>${threadCount}</threads>
-                        <rampup>${rampupTime}</rampup>
-                        <duration>${durationSecond}</duration>
+                        <threads1>10</threads1>
+                        <rampup1>10</rampup1>
+                        <duration1>120</duration1>
+						<threads2>5</threads2>
+                        <rampup2>10</rampup2>
+                        <duration2>100</duration2>
+						<threads3>20</threads3>
+                        <rampup3>10</rampup3>
+                        <duration3>120</duration3>
                    </propertiesUser>
-				   <testFilesIncluded>
+				 <!--  <testFilesIncluded>
 				       <jMeterTestFile>worldTimeZoneTest.jmx</jMeterTestFile>
                        <jMeterTestFile>mocktarget.jmx</jMeterTestFile>
-                   </testFilesIncluded>
+                   </testFilesIncluded> -->
                </configuration>
                 <executions>
                    <execution>
@@ -64,13 +70,6 @@
                            <goal>jmeter</goal>
                         </goals>
                    </execution>
-                <!--   <execution>
-                       <id>check-results</id>
-                       <phase>verify</phase>
-                       <goals>
-                          <goal>results</goal>
-                       </goals>
-                   </execution> -->
                </executions>
             </plugin>
         </plugins>
