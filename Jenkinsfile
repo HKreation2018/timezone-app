@@ -41,59 +41,64 @@ pipeline {
       }
     } */
 	
-	stage('performance test') {
+	 stage('performance test') {
             stages {
-                stage('In Sequential 1') {
-						  input {
-             message 'threads count'
-             id 'ThreadCount'
-             ok 'PROCEED'
-             submitter 'admin'
-             parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'THREADS'
-             }
-        }
-                    steps {
-                        echo "In Sequential 1"
-                    }
-                }
-                stage('In Sequential 2') {
-						  input {
-             message 'rampup interval'
-             id 'rampup'
-             ok 'PROCEED'
-             submitter 'admin'
-             parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'rampup'
-             }
-        }
-                    steps {
-                        echo "In Sequential 2"
-                    }
-                }
-					stage('Load test') {
-	  input {
-             message 'duration time'
-             id 'duration'
-             ok 'PROCEED'
-             submitter 'admin'
-             parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'duration'
-             }
-        }
+				stage('Parallel In Sequential') {
+                    parallel {
+                        stage('Thread Count') {
+							input {
+                               message 'threads count'
+                               id 'ThreadCount'
+                               ok 'PROCEED'
+                               submitter 'admin'
+                               parameters {
+                               choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'THREADS'
+                               }
+                             }
+                            steps {
+                                echo "Thread Count input"
+                            }
+                        }
+                        stage('rampup time') {
+							input {
+                               message 'rampup count'
+                               id 'rampup'
+                               ok 'PROCEED'
+                               submitter 'admin'
+                               parameters {
+                               choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'rampup'
+                               }
+                             }
+                            steps {
+                                echo "rampup time input"
+                            }
+                        }
+						stage('Load test') {
+	                    input {
+                               message 'duration count'
+                               id 'duration'
+                               ok 'PROCEED'
+                               submitter 'admin'
+                               parameters {
+                               choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'duration'
+                               }
+                             }
 	       
-      steps {
-             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120'
-      }
+                            steps {
+                               bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120'
+                              }
 	  
-	  post {
-        always {
-            archiveArtifacts artifacts: 'target/jmeter/results/*.csv', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
-			perfReport 'target/jmeter/results/*.csv'
-			publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/jmeter/reports/worldTimeZoneTest', reportFiles: 'index.html', reportName: 'Performance Report', reportTitles: ''])
-        }
-	}
-    }
+	                        post {
+                              always {
+                                      archiveArtifacts artifacts: 'target/jmeter/results/*.csv', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
+			                          perfReport 'target/jmeter/results/*.csv'
+			                          publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/jmeter/reports/worldTimeZoneTest', reportFiles: 'index.html', reportName: 'Performance Report', reportTitles: ''])
+                                }
+	                        }
+                        }
+						
+                    }
+                }
             }
         }
   }
