@@ -47,9 +47,8 @@ pipeline {
       }
 	  
 	  post {
-        always {
+        success {
             archiveArtifacts artifacts: 'target/jmeter/results/*.csv', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
-			sendSplunkFile excludes: '', includes: 'target/jmeter/results/*.csv', sizeLimit: '100MB'
 			perfReport 'target/jmeter/results/*.csv'
 			publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/jmeter/reports/${fileToBeExecuted}', reportFiles: 'index.html', reportName: 'Performance Report', reportTitles: ''])
         }
