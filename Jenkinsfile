@@ -48,7 +48,7 @@ pipeline {
 	  
 	  post {
         success {
-            archiveArtifacts artifacts: 'target/jmeter/results/*.csv', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'target/jmeter/results/*.csv', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true,allowEmptyArchive: true
 			perfReport 'target/jmeter/results/*.csv'
 			publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/jmeter/reports/${fileToBeExecuted}', reportFiles: 'index.html', reportName: 'Performance Report', reportTitles: ''])
         }
