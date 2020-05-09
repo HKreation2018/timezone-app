@@ -43,7 +43,7 @@ pipeline {
 	
 	stage('performance test') {
             stages {
-                stage('In Sequential 1') {
+                stage('Input Thread Count') {
 						  input {
              message 'threads count'
              id 'ThreadCount'
@@ -54,31 +54,31 @@ pipeline {
              }
         }
                     steps {
-                        echo "In Sequential 1"
+                        echo "thread count input successful"
                     }
                 }
-                stage('In Sequential 2') {
+                stage('Input RampUp time') {
 						  input {
              message 'rampup interval'
              id 'rampup'
              ok 'PROCEED'
              submitter 'admin'
              parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'rampup'
+                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the rampup time', name: 'rampup'
              }
         }
                     steps {
-                        echo "In Sequential 2"
+                        echo "rampup input successful"
                     }
                 }
-					stage('Load test') {
+					stage('Input Duration -> LoadTest') {
 	  input {
              message 'duration time'
              id 'duration'
              ok 'PROCEED'
              submitter 'admin'
              parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'duration'
+                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the duration of loadtest?', name: 'duration'
              }
         }
 	       
