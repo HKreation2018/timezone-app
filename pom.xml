@@ -58,10 +58,10 @@
                         <rampup3>10</rampup3>
                         <duration3>120</duration3>
                    </propertiesUser>
-				 <!--  <testFilesIncluded>
-				       <jMeterTestFile>worldTimeZoneTest.jmx</jMeterTestFile>
-                       <jMeterTestFile>mocktarget.jmx</jMeterTestFile>
-                   </testFilesIncluded> -->
+				  <testFilesIncluded>
+				       <jMeterTestFile>${fileName}</jMeterTestFile>
+                      <!--  <jMeterTestFile>mocktarget.jmx</jMeterTestFile> -->
+                   </testFilesIncluded> 
                </configuration>
                 <executions>
                    <execution>
