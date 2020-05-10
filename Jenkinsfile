@@ -41,49 +41,9 @@ pipeline {
       }
     } */
 	
-	stage('performance test') {
-            stages {
-                stage('Input Thread Count') {
-						  input {
-             message 'threads count'
-             id 'ThreadCount'
-             ok 'PROCEED'
-             submitter 'admin'
-             parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'THREADS'
-             }
-        }
-                    steps {
-                        echo "thread count input successful"
-                    }
-                }
-                stage('Input RampUp time') {
-						  input {
-             message 'rampup interval'
-             id 'rampup'
-             ok 'PROCEED'
-             submitter 'admin'
-             parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the rampup time', name: 'rampup'
-             }
-        }
-                    steps {
-                        echo "rampup input successful"
-                    }
-                }
-					stage('Input Duration -> LoadTest') {
-	  input {
-             message 'duration time'
-             id 'duration'
-             ok 'PROCEED'
-             submitter 'admin'
-             parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the duration of loadtest?', name: 'duration'
-             }
-        }
-	       
+	stage('performance test') {       
       steps {
-             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120 -DfileName=${SCRIPT_FILE_NAME}'
+             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=${RAMPUP} -DdurationSecond=${DURATION} -DfileName=${SCRIPT_FILE_NAME}'
       }
 	  
 	  post {
@@ -94,7 +54,5 @@ pipeline {
         }
 	}
     }
-            }
-        }
   }
 }
