@@ -83,7 +83,7 @@ pipeline {
         }
 	       
       steps {
-             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120 -DfileName=worldTimeZoneTest.jmx'
+             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120 -DfileName=${nameOfScriptFile}'
       }
 	  
 	  post {
