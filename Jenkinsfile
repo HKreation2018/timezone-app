@@ -83,7 +83,7 @@ pipeline {
         }
 	       
       steps {
-             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120 -DfileName=$nameOfScriptFile'
+             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120 -DfileName=${SCRIPT_FILE_NAME}'
       }
 	  
 	  post {
